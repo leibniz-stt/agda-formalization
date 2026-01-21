@@ -219,12 +219,12 @@ Assumption = refl
 module STT (I : Interval ℓ-zero) where -- we assume the existence of an interval type
   open HornLifting I
 
-  Definition-4-9 : (Type → Type) × (Map → Type₁)
-  Definition-4-9 .fst = isSegal
-  Definition-4-9 .snd = isInnerAnodyne
+  Definition-4-8 : (Type → Type) × (Map → Type₁)
+  Definition-4-8 .fst = isSegal
+  Definition-4-8 .snd = isInnerAnodyne
 
-  Theorem-4-10 : (n k : ℕ) → 0 <ᵗ k → k <ᵗ n → isInnerAnodyne ⦅ ƛ n k ⦆
-  Theorem-4-10 = isInnerAnodyneHornInclusion
+  Theorem-4-9 : (n k : ℕ) → 0 <ᵗ k → k <ᵗ n → isInnerAnodyne ⦅ ƛ n k ⦆
+  Theorem-4-9 = isInnerAnodyneHornInclusion
 
-  Remark-4-12 : (n k : ℕ) → 0 <ᵗ k → k <ᵗ n → isInnerAnodyneFib ⦅ ƛ n k ⦆
-  Remark-4-12 = isInnerAnodyneFibHornInclusion
+  Remark-4-11 : (n k : ℕ) → 0 <ᵗ k → k <ᵗ n → isInnerAnodyneFib ⦅ ƛ n k ⦆
+  Remark-4-11 = isInnerAnodyneFibHornInclusion
