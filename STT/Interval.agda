@@ -163,7 +163,12 @@ module HornLifting (I' : Interval ℓ) where
   ⟦_⟧ : {n : ℕ} → Δ n → (Fin (2 + n) → 𝐈)
   ⟦_⟧ = fst
 
-  -- horn Λⁿₖ
+  -- horns.
+  {- Because of an indexing mistake in an earlier version of the paper, `Λ n k`
+  implements the horn Λⁿₙ₋ₖ instead of the horn Λⁿₖ. The sitatuation is entirely
+  symmetric and this indexing mistake has no consequence for the main theorem
+  because, if we quantify over all (inner) horns, both implementation are
+  equivalent. Nevertheless, this indexing mistake will be fixed. -}
   Λ : (n k : ℕ) → Type ℓ
   Λ n k = Σ[ x ∈ Δ n ] ∃[ j ∈ Fin (suc n) ]
           (¬ (fst j ≡ n ∸ k)) × (⟦ x ⟧ (injectSuc j) ≡ ⟦ x ⟧ (fsuc j))
