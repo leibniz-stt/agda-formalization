@@ -16,7 +16,7 @@ open import Prelude renaming (Const to const)
 open import Categories.Fam renaming (Fam to fam ; 𝑭𝑨𝑴 to famCat)
 open import Categories.Map renaming (Map to map ; 𝑴𝑨𝑷 to mapCat)
 open import Categories.FamMapEquiv as fm≃mp
-open import Categories.ProtoWildCat
+open import Categories.WildPreorder
 
 open import PushoutProdFib as Rijke
 
@@ -62,34 +62,34 @@ private
 
 Definition-3-1 : (A : WildCat ℓ₁ ℓ₂) (B : WildCat ℓ₃ ℓ₄)
                → WildFunctor A B → Type _
-Definition-3-1 A B = isWildEquiv
+Definition-3-1 A B = isNaiveIso
   where
   -- in practice, as mentioned in Remark 3.2, we often use the
-  -- identical notion of equivalence between underlying proto wild categories
-  protoEquiv = isEquivProtoWildFunctor
+  -- identical notion of equivalence between underlying wild preorders
+  WPEquiv = isEquivWPFunctor
   -- the type of such equivalences coincide with the usual definition
   -- of wild categories
-  equivDefsCoincide : (A ≃ᵂ B) -- ← Type of equivalences between A and B
-                    ≡ (⌈ A ⌉ ≅ᴾᵂ ⌈ B ⌉) -- ← Type of equivalences between their
+  equivDefsCoincide : (A ≅ᵂ B) -- ← Type of naive isomorphisms between A and B
+                    ≡ (⌈ A ⌉ ≅ᵂᴾ ⌈ B ⌉) -- ← Type of equivalences between their
                                       -- underlying wild categories
-  equivDefsCoincide = ua Equiv-≃ᵂ-≅ᴾᵂ
+  equivDefsCoincide = ua Equiv-≅ᵂ-≅ᵂᴾ
 
--- Proto-wild categories and univalence for them
+-- Wild preorders and univalence for them
 Remark-3-2 : Type₁
-           × ({A B : ProtoWildCat ℓ-zero ℓ-zero} → (A ≡ B) ≃ (A ≅ᴾᵂ B))
-Remark-3-2 .fst = ProtoWildCat ℓ-zero ℓ-zero
-Remark-3-2 .snd = univalenceProtoWildCat
+           × ({A B : WildPreorder ℓ-zero ℓ-zero} → (A ≡ B) ≃ (A ≅ᵂᴾ B))
+Remark-3-2 .fst = WildPreorder ℓ-zero ℓ-zero
+Remark-3-2 .snd = univalenceWildPreorder
   where
   WCat = WildCat ℓ-zero ℓ-zero
-  PWCat = ProtoWildCat ℓ-zero ℓ-zero
+  WPCat = WildPreorder ℓ-zero ℓ-zero
 
   -- More specifically: we can transport properties of wild categories
   -- as long as they do not mention equations (i.e. mention only the
-  -- underlying proto-wild categorical structure
-  transportWildCatProperty : (P : PWCat → Type) (C D : WCat)
-    → C ≃ᵂ D → P ⌈ C ⌉ → P ⌈ D ⌉
+  -- underlying wild preorder structure)
+  transportWildCatProperty : (P : WPCat → Type) (C D : WCat)
+    → C ≅ᵂ D → P ⌈ C ⌉ → P ⌈ D ⌉
   transportWildCatProperty P C D e p =
-    subst P (invEq univalenceProtoWildCat (≃ᵂ→≅ᴾᵂ e)) p
+    subst P (invEq univalenceWildPreorder (≅ᵂ→≅ᵂᴾ e)) p
 
 Map = map ℓ-zero
 Fam = fam ℓ-zero
@@ -120,7 +120,7 @@ NB₂ f g = refl
 3-1-2 : WildCat (ℓ-suc ℓ-zero) ℓ-zero
 3-1-2 = 𝑭𝑨𝑴
 
--- Same two categories as 'proto wild categories' (wild categories
+-- Same two categories as 'wild preorders' (wild categories
 -- without equation)
 𝑭𝑨𝑴₋ = ⌈ 𝑭𝑨𝑴 ⌉
 𝑴𝑨𝑷₋ = ⌈ 𝑴𝑨𝑷 ⌉
@@ -131,8 +131,8 @@ NB₂ f g = refl
 χ⁻¹ : Fam → Map
 χ⁻¹ = Fam→Map
 
-Proposition-3-3 : ⌈ 𝑭𝑨𝑴 ⌉ ≅ᴾᵂ ⌈ 𝑴𝑨𝑷 ⌉
-Proposition-3-3 = 𝑭𝑨𝑴≅ᴾᵂ𝑴𝑨𝑷
+Proposition-3-3 : ⌈ 𝑭𝑨𝑴 ⌉ ≅ᵂᴾ ⌈ 𝑴𝑨𝑷 ⌉
+Proposition-3-3 = 𝑭𝑨𝑴≅ᵂᴾ𝑴𝑨𝑷
 
 Proposition-3-4 : {f : A → B} {g : X → Y} (b : B) (y : Y)
   → fiber (f ×^ g) (b , y) ≃ join (fiber f b) (fiber g y)
@@ -149,8 +149,8 @@ Proposition-3-6 .snd =
                       (sym (invEq univalenceFam (Fam→Map→Fam _))))
   ∙ Fam→MapPres⊠≡
 
-Proposition-3-7 : hasBiProtoFunctorStructure 𝑭𝑨𝑴₋ 𝑭𝑨𝑴₋ 𝑭𝑨𝑴₋ _⊠ᶠ_
-Proposition-3-7 = hasBiProtoFunctorStructure⊠ᶠ
+Proposition-3-7 : hasBiWPFunctorStructure 𝑭𝑨𝑴₋ 𝑭𝑨𝑴₋ 𝑭𝑨𝑴₋ _⊠ᶠ_
+Proposition-3-7 = hasBiWPFunctorStructure⊠ᶠ
 
 Definition-3-8 : (f : A → B) → Type
 Definition-3-8 = const
@@ -173,8 +173,8 @@ Proposition-3-12 .fst {f = f} {g} =
   ∙ (invEq univalenceFam (Fam→Map→Fam (χ f ⋔ᶠ χ g)))
 Proposition-3-12 .snd = sym Fam→MapPres⋔≡
 
-Proposition-3-13 : hasBiProtoFunctorStructure (𝑭𝑨𝑴₋ ^opᵖʳ) 𝑭𝑨𝑴₋ 𝑭𝑨𝑴₋ _⋔ᶠ_
-Proposition-3-13 = hasBiProtoFunctorStructure⋔ᶠ
+Proposition-3-13 : hasBiWPFunctorStructure (𝑭𝑨𝑴₋ ^opʷᵖ) 𝑭𝑨𝑴₋ 𝑭𝑨𝑴₋ _⋔ᶠ_
+Proposition-3-13 = hasBiWPFunctorStructure⋔ᶠ
 
 Lemma-3-14 : (f g h : Map)
            → ((f ⊠ᵐ g) ⊠ᵐ h ≡ f ⊠ᵐ (g ⊠ᵐ h))

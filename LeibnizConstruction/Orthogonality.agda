@@ -9,7 +9,7 @@ module LeibnizConstruction.Orthogonality where
 
 -- Local imports
 open import Prelude
-open import Categories.ProtoWildCat
+open import Categories.WildPreorder
 open import Categories.Map
 open import LeibnizConstruction.Map
 
@@ -23,7 +23,7 @@ open import Cubical.Foundations.Univalence
 
 open import Cubical.Data.Sigma
 
-open hasBiProtoFunctorStructure
+open hasBiWPFunctorStructure
 open Iso
 
 
@@ -165,6 +165,6 @@ retract⊥ i j f (j→i , i→j , c) i⊥f = ⊥↔isEquiv⋔ j f .snd
   closedRetract .fst = ⋔ᵐ→ₗ i j f i→j
   closedRetract .snd .fst = ⋔ᵐ→ₗ j i f j→i
   closedRetract .snd .snd =
-    sym (leftAct (hasBiProtoFunctorStructure⋔ᵐ) f .snd .snd i→j j→i)
-    ∙ cong (leftAct hasBiProtoFunctorStructure⋔ᵐ f .fst) c
-    ∙ leftAct (hasBiProtoFunctorStructure⋔ᵐ) f .snd .fst j
+    sym (leftAct (hasBiWPFunctorStructure⋔ᵐ) f .snd .snd i→j j→i)
+    ∙ cong (leftAct hasBiWPFunctorStructure⋔ᵐ f .fst) c
+    ∙ leftAct (hasBiWPFunctorStructure⋔ᵐ) f .snd .fst j

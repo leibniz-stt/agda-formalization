@@ -9,7 +9,7 @@ module STT.Interval where
 
 -- Local imports
 open import Prelude
-open import Categories.ProtoWildCat
+open import Categories.WildPreorder
 open import Categories.Map
 open import LeibnizConstruction.Map
 open import LeibnizConstruction.Orthogonality

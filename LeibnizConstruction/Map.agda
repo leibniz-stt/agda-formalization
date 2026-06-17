@@ -7,7 +7,7 @@ module LeibnizConstruction.Map where
 -- Local imports
 open import Prelude
 open import PushoutProdFib
-open import Categories.ProtoWildCat
+open import Categories.WildPreorder
 open import Categories.Map
 open import Categories.Fam
 open import Categories.FamMapEquiv
@@ -30,7 +30,7 @@ open import Cubical.HITs.Pushout.PushoutProduct
 open import Cubical.Data.Sigma
 open import Cubical.Data.Unit
 
-open hasBiProtoFunctorStructure
+open hasBiWPFunctorStructure
 open Iso
 
 private
@@ -128,19 +128,19 @@ Fam→MapPres⊠≡ {C = C} {D} =
 
 -- Technical result used for transporting from Fam to Map
 transportLeibnizConstruction :
-  (P : (C : ProtoWildCat (ℓ-suc ℓ₁) ℓ₁)
+  (P : (C : WildPreorder (ℓ-suc ℓ₁) ℓ₁)
        (f g : fst C → fst C → fst C) → Type ℓ₃)
   → P ⌈ 𝑭𝑨𝑴 ℓ₁ ⌉ _⊠ᶠ_ _⋔ᶠ_
    ≡ P ⌈ 𝑴𝑨𝑷 ℓ₁ ⌉ _⊠ᵐ_ _⋔ᵐ_
 transportLeibnizConstruction P =
-  transportAlongWildEquiv _ _ 𝑭𝑨𝑴≅ᴾᵂ𝑴𝑨𝑷 P _⊠ᶠ_ _⊠ᵐ_
+  transportAlongWildEquiv _ _ 𝑭𝑨𝑴≅ᵂᴾ𝑴𝑨𝑷 P _⊠ᶠ_ _⊠ᵐ_
     (funExt (λ C → funExt λ D → Fam→MapPres⊠≡))
     _⋔ᶠ_ _⋔ᵐ_
     (funExt (λ C → funExt (λ D → Fam→MapPres⋔≡')))
   where
   transportAlongWildEquiv :
-    (C C' : ProtoWildCat ℓ₁ ℓ₂) (E : C ≅ᴾᵂ C')
-    (P : (C : ProtoWildCat ℓ₁ ℓ₂) (f g : fst C → fst C → fst C) → Type ℓ₃)
+    (C C' : WildPreorder ℓ₁ ℓ₂) (E : C ≅ᵂᴾ C')
+    (P : (C : WildPreorder ℓ₁ ℓ₂) (f g : fst C → fst C → fst C) → Type ℓ₃)
     (L : fst C → fst C → fst C) (L'  : fst C' → fst C' → fst C')
     (L≡L' : (λ x y → fst (fst E) (L (invEq (_ , fst (snd E)) x)
                                      (invEq (_ , fst (snd E)) y))) ≡ L')
@@ -149,7 +149,7 @@ transportLeibnizConstruction P =
                                      (invEq (_ , fst (snd E)) y))) ≡ R')
     → P C L R ≡ P C' L' R'
   transportAlongWildEquiv C =
-    JProtoWildCat _ λ _ _ → J> λ _ → J> refl
+    JWildPreorder _ λ _ _ → J> λ _ → J> refl
 
 -- The main lemma
 abstract
@@ -161,31 +161,31 @@ abstract
 
 -- Let us spell out these properties, like we did for the Leibniz
 -- construction on Fam.
-hasBiProtoFunctorStructure⋔ᵐ :
-  hasBiProtoFunctorStructure (⌈ 𝑴𝑨𝑷 ℓ₁ ⌉ ^opᵖʳ) ⌈ 𝑴𝑨𝑷 ℓ₁ ⌉ ⌈ 𝑴𝑨𝑷 ℓ₁ ⌉ _⋔ᵐ_
-hasBiProtoFunctorStructure⋔ᵐ = areAdjointBiFunctors-×ᵐ-⋔ᵐ .snd .fst
+hasBiWPFunctorStructure⋔ᵐ :
+  hasBiWPFunctorStructure (⌈ 𝑴𝑨𝑷 ℓ₁ ⌉ ^opʷᵖ) ⌈ 𝑴𝑨𝑷 ℓ₁ ⌉ ⌈ 𝑴𝑨𝑷 ℓ₁ ⌉ _⋔ᵐ_
+hasBiWPFunctorStructure⋔ᵐ = areAdjointBiFunctors-×ᵐ-⋔ᵐ .snd .fst
 
-hasBiProtoFunctorStructure⊠ᵐ :
-  hasBiProtoFunctorStructure ⌈ 𝑴𝑨𝑷 ℓ₁ ⌉ ⌈ 𝑴𝑨𝑷 ℓ₁ ⌉ ⌈ 𝑴𝑨𝑷 ℓ₁ ⌉ _⊠ᵐ_
-hasBiProtoFunctorStructure⊠ᵐ = areAdjointBiFunctors-×ᵐ-⋔ᵐ .fst
+hasBiWPFunctorStructure⊠ᵐ :
+  hasBiWPFunctorStructure ⌈ 𝑴𝑨𝑷 ℓ₁ ⌉ ⌈ 𝑴𝑨𝑷 ℓ₁ ⌉ ⌈ 𝑴𝑨𝑷 ℓ₁ ⌉ _⊠ᵐ_
+hasBiWPFunctorStructure⊠ᵐ = areAdjointBiFunctors-×ᵐ-⋔ᵐ .fst
 
 -- Functorial action, explicitly
 ⋔ᵐ→ₗ : (A B C : Map ℓ₁) → Map[ A , B ] → Map[ B ⋔ᵐ C , A ⋔ᵐ C ]
-⋔ᵐ→ₗ A B C f = leftAct (hasBiProtoFunctorStructure⋔ᵐ) C .fst f
+⋔ᵐ→ₗ A B C f = leftAct (hasBiWPFunctorStructure⋔ᵐ) C .fst f
 
 ⋔ᵐ→ᵣ : (A B C : Map ℓ₁) → Map[ B , C ] →  Map[ A ⋔ᵐ B , A ⋔ᵐ C ]
-⋔ᵐ→ᵣ A B C f = rightAct (hasBiProtoFunctorStructure⋔ᵐ) A .fst {x = B} {C} f
+⋔ᵐ→ᵣ A B C f = rightAct (hasBiWPFunctorStructure⋔ᵐ) A .fst {x = B} {C} f
 
 ⊠ᵐ→ₗ : (A B C : Map ℓ₁) → Map[ A , B ] → Map[ A ⊠ᵐ C , B ⊠ᵐ C ]
-⊠ᵐ→ₗ A B C f = leftAct (hasBiProtoFunctorStructure⊠ᵐ) C .fst f
+⊠ᵐ→ₗ A B C f = leftAct (hasBiWPFunctorStructure⊠ᵐ) C .fst f
 
 ⊠ᵐ→ᵣ : (A B C : Map ℓ₁) → Map[ B , C ] → Map[ A ⊠ᵐ B , A ⊠ᵐ C ]
-⊠ᵐ→ᵣ A B C f = rightAct (hasBiProtoFunctorStructure⊠ᵐ) A .fst {x = B} {C} f
+⊠ᵐ→ᵣ A B C f = rightAct (hasBiWPFunctorStructure⊠ᵐ) A .fst {x = B} {C} f
 
 -- Adjointness statement
 wildBiAdjoint-⊠ᵐ-⋔ᵐ : wildBiAdjoint ⌈ 𝑴𝑨𝑷 ℓ₁ ⌉ _⊠ᵐ_ _⋔ᵐ_
-                      hasBiProtoFunctorStructure⊠ᵐ
-                      hasBiProtoFunctorStructure⋔ᵐ
+                      hasBiWPFunctorStructure⊠ᵐ
+                      hasBiWPFunctorStructure⋔ᵐ
 wildBiAdjoint-⊠ᵐ-⋔ᵐ = areAdjointBiFunctors-×ᵐ-⋔ᵐ .snd .snd
 
 -- Associativity

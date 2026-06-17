@@ -1,12 +1,12 @@
 {-# OPTIONS --cubical --guardedness --lossy-unification #-}
 {-
-Equivalence between fam and map as (proto)-wild categories
+Equivalence between fam and map as wild preorders
 -}
 module Categories.FamMapEquiv where
 
 -- Local imports
 open import Prelude
-open import Categories.ProtoWildCat
+open import Categories.WildPreorder
 open import Categories.Map
 open import Categories.Fam
 
@@ -133,10 +133,10 @@ Iso⃗Map-Fam .ret _ =
   ΣPathP (refl , (funExt (λ _ → funExt (λ _ → transportRefl _)) ))
 
 -- The main result
-𝑭𝑨𝑴≅ᴾᵂ𝑴𝑨𝑷 : ⌈ 𝑭𝑨𝑴 ℓ ⌉ ≅ᴾᵂ ⌈ 𝑴𝑨𝑷 ℓ ⌉
-𝑭𝑨𝑴≅ᴾᵂ𝑴𝑨𝑷 .fst .fst = Fam→Map
-𝑭𝑨𝑴≅ᴾᵂ𝑴𝑨𝑷 .fst .snd .fst  = Fam→Map⃗
-𝑭𝑨𝑴≅ᴾᵂ𝑴𝑨𝑷 .fst .snd .snd .fst _ = Fam→Map⃗Id _
-𝑭𝑨𝑴≅ᴾᵂ𝑴𝑨𝑷 .fst .snd .snd .snd = Fam→Map⃗Comp
-𝑭𝑨𝑴≅ᴾᵂ𝑴𝑨𝑷 .snd .fst = isoToIsEquiv Iso-Fam-Map
-𝑭𝑨𝑴≅ᴾᵂ𝑴𝑨𝑷 .snd .snd x y = isoToIsEquiv Iso⃗Map-Fam
+𝑭𝑨𝑴≅ᵂᴾ𝑴𝑨𝑷 : ⌈ 𝑭𝑨𝑴 ℓ ⌉ ≅ᵂᴾ ⌈ 𝑴𝑨𝑷 ℓ ⌉
+𝑭𝑨𝑴≅ᵂᴾ𝑴𝑨𝑷 .fst .fst = Fam→Map
+𝑭𝑨𝑴≅ᵂᴾ𝑴𝑨𝑷 .fst .snd .fst  = Fam→Map⃗
+𝑭𝑨𝑴≅ᵂᴾ𝑴𝑨𝑷 .fst .snd .snd .fst _ = Fam→Map⃗Id _
+𝑭𝑨𝑴≅ᵂᴾ𝑴𝑨𝑷 .fst .snd .snd .snd = Fam→Map⃗Comp
+𝑭𝑨𝑴≅ᵂᴾ𝑴𝑨𝑷 .snd .fst = isoToIsEquiv Iso-Fam-Map
+𝑭𝑨𝑴≅ᵂᴾ𝑴𝑨𝑷 .snd .snd x y = isoToIsEquiv Iso⃗Map-Fam

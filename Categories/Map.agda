@@ -7,7 +7,7 @@ module Categories.Map where
 
 -- Local imports
 open import Prelude
-open import Categories.ProtoWildCat
+open import Categories.WildPreorder
 
 -- Library imports
 open import Cubical.Foundations.Prelude

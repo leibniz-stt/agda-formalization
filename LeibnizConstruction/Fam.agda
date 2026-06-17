@@ -6,7 +6,7 @@ module LeibnizConstruction.Fam where
 
 -- Local imports
 open import Prelude
-open import Categories.ProtoWildCat
+open import Categories.WildPreorder
 open import Categories.Fam
 
 -- Library imports
@@ -79,33 +79,33 @@ Iso-TotFam⋔ᶠ-[BaseFam→TotFam] {AB = (A , B)} {(X , Y)}=
 ⊠ᶠ→ᵣ A B C (F , P) .fst (a , b) .snd = F b
 ⊠ᶠ→ᵣ A B C (F , P) .snd (a , b) = joinPushout→ (idfun _) (P b)
 
-open hasBiProtoFunctorStructure
+open hasBiWPFunctorStructure
 
 -- Functoriality of _⋔ᶠ_
-hasBiProtoFunctorStructure⋔ᶠ :
-  hasBiProtoFunctorStructure (⌈ 𝑭𝑨𝑴 ℓ₁ ⌉ ^opᵖʳ) ⌈ 𝑭𝑨𝑴 ℓ₁ ⌉ ⌈ 𝑭𝑨𝑴 ℓ₁ ⌉ _⋔ᶠ_
-hasBiProtoFunctorStructure⋔ᶠ .leftAct d .fst = ⋔ᶠ→ₗ _ _ d
-hasBiProtoFunctorStructure⋔ᶠ .leftAct d .snd .fst x = refl
-hasBiProtoFunctorStructure⋔ᶠ .leftAct d .snd .snd F G = refl
-hasBiProtoFunctorStructure⋔ᶠ .rightAct c .fst {x = x} {y} = ⋔ᶠ→ᵣ c x y
-hasBiProtoFunctorStructure⋔ᶠ .rightAct c .snd .fst x = refl
-hasBiProtoFunctorStructure⋔ᶠ .rightAct c .snd .snd F G = refl
+hasBiWPFunctorStructure⋔ᶠ :
+  hasBiWPFunctorStructure (⌈ 𝑭𝑨𝑴 ℓ₁ ⌉ ^opʷᵖ) ⌈ 𝑭𝑨𝑴 ℓ₁ ⌉ ⌈ 𝑭𝑨𝑴 ℓ₁ ⌉ _⋔ᶠ_
+hasBiWPFunctorStructure⋔ᶠ .leftAct d .fst = ⋔ᶠ→ₗ _ _ d
+hasBiWPFunctorStructure⋔ᶠ .leftAct d .snd .fst x = refl
+hasBiWPFunctorStructure⋔ᶠ .leftAct d .snd .snd F G = refl
+hasBiWPFunctorStructure⋔ᶠ .rightAct c .fst {x = x} {y} = ⋔ᶠ→ᵣ c x y
+hasBiWPFunctorStructure⋔ᶠ .rightAct c .snd .fst x = refl
+hasBiWPFunctorStructure⋔ᶠ .rightAct c .snd .snd F G = refl
 
 -- Functoriality of _⊠ᶠ_
-hasBiProtoFunctorStructure⊠ᶠ :
-  hasBiProtoFunctorStructure ⌈ 𝑭𝑨𝑴 ℓ₁ ⌉ ⌈ 𝑭𝑨𝑴 ℓ₁ ⌉ ⌈ 𝑭𝑨𝑴 ℓ₁ ⌉ _⊠ᶠ_
-hasBiProtoFunctorStructure⊠ᶠ .leftAct d .fst {y = y} = ⊠ᶠ→ₗ _ y d
-hasBiProtoFunctorStructure⊠ᶠ .leftAct d .snd .fst _ =
+hasBiWPFunctorStructure⊠ᶠ :
+  hasBiWPFunctorStructure ⌈ 𝑭𝑨𝑴 ℓ₁ ⌉ ⌈ 𝑭𝑨𝑴 ℓ₁ ⌉ ⌈ 𝑭𝑨𝑴 ℓ₁ ⌉ _⊠ᶠ_
+hasBiWPFunctorStructure⊠ᶠ .leftAct d .fst {y = y} = ⊠ᶠ→ₗ _ y d
+hasBiWPFunctorStructure⊠ᶠ .leftAct d .snd .fst _ =
   ΣPathP (refl , (funExt (λ {(x , a) → funExt
     (elim∣inl x ↦ refl ∣inr x ↦ refl ∣push x ↦ λ _ → refl)})))
-hasBiProtoFunctorStructure⊠ᶠ .leftAct d .snd .snd F G =
+hasBiWPFunctorStructure⊠ᶠ .leftAct d .snd .snd F G =
   ΣPathP (refl , (funExt (λ {(x , a) → funExt
     (elim∣inl x ↦ refl ∣inr x ↦ refl ∣push x ↦ λ _ → refl)})))
-hasBiProtoFunctorStructure⊠ᶠ .rightAct c .fst {x = x} {y} = ⊠ᶠ→ᵣ c x y
-hasBiProtoFunctorStructure⊠ᶠ .rightAct c .snd .fst _ =
+hasBiWPFunctorStructure⊠ᶠ .rightAct c .fst {x = x} {y} = ⊠ᶠ→ᵣ c x y
+hasBiWPFunctorStructure⊠ᶠ .rightAct c .snd .fst _ =
   ΣPathP (refl , (funExt (λ {(x , a) → funExt
     (elim∣inl x ↦ refl ∣inr x ↦ refl ∣push x ↦ λ _ → refl)})))
-hasBiProtoFunctorStructure⊠ᶠ .rightAct c .snd .snd F G =
+hasBiWPFunctorStructure⊠ᶠ .rightAct c .snd .snd F G =
   ΣPathP (refl , (funExt (λ {(x , a) → funExt
     (elim∣inl x ↦ refl ∣inr x ↦ refl ∣push x ↦ λ _ → refl)})))
 

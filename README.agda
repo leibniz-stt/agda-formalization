@@ -2,7 +2,7 @@
 module README where
 
 -- This formalisation depends on the Cubical library, version of
--- 28 May 2026, commit 3f2e1f and type checks with Agda 2.8.0.
+-- 12 June 2026, commit 7b9019 and type checks with Agda 2.8.0.
 
 -- The formalisation is structured as follows:
 
@@ -18,8 +18,8 @@ import PushoutProdFib
 
 -- * Categories
 --     This directory contains basic constructions from (wild) category
---     theory. In particular 'proto'-wild categories are set up in:
-import Categories.ProtoWildCat
+--     theory. In particular, wild preorders are set up in:
+import Categories.WildPreorder
 
 --     The categories 𝑴𝑨𝑷 and 𝑭𝑨𝑴 – two takes on the arrow category over
 --     the universe of types – are introduced.
